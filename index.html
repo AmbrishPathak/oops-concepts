@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP in Python Cheatsheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #1f2937; /* bg-gray-800 */
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        .section-card {
+            background-color: #1f2937; /* bg-gray-800 */
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            border-top: 4px solid;
+            height: 100%;
+        }
+        .section-title {
+            color: #e5e7eb; /* text-gray-200 */
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+        .code-comment { color: #6b7280; }
+        .code-keyword { color: #93c5fd; }
+        .code-string { color: #a5f3fc; }
+        .code-function { color: #fde047; }
+        .code-class { color: #6ee7b7; }
+        .code-decorator { color: #f0abfc; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Object-Oriented Programming (OOP) in Python</h1>
+            <p class="text-gray-400 mt-2">Core concepts and syntax for your next technical interview.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- OOP Concepts -->
+            <div class="section-card lg:col-span-3" style="border-color: #3b82f6;">
+                <h2 class="section-title">The Four Pillars of OOP</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                    <div><strong class="text-blue-400">Abstraction:</strong><p class="text-gray-400">Hiding complex implementation details and showing only the essential features of the object.</p></div>
+                    <div><strong class="text-blue-400">Encapsulation:</strong><p class="text-gray-400">Bundling data (attributes) and methods that operate on the data into a single unit (class). Restricts direct access to components.</p></div>
+                    <div><strong class="text-blue-400">Inheritance:</strong><p class="text-gray-400">Mechanism for creating a new class (child) from an existing class (parent), inheriting its attributes and methods.</p></div>
+                    <div><strong class="text-blue-400">Polymorphism:</strong><p class="text-gray-400">The ability of different classes to be treated as instances of the same class through a common interface.</p></div>
+                </div>
+            </div>
+
+            <!-- Class & Object -->
+            <div class="section-card" style="border-color: #22c55e;">
+                <h2 class="section-title">Class and Object Syntax</h2>
+                <pre class="code-block"><code class="language-python"><span class="code-keyword">class</span> <span class="code-class">Dog</span>:
+    <span class="code-comment"># Class variable (shared among all instances)</span>
+    species = <span class="code-string">"Canis familiaris"</span>
+
+    <span class="code-comment"># The constructor method</span>
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, name, age):
+        <span class="code-comment"># Instance variables (unique to each instance)</span>
+        self.name = name
+        self.age = age
+
+<span class="code-comment"># Creating an object (instance)</span>
+my_dog = <span class="code-class">Dog</span>(<span class="code-string">"Rex"</span>, <span class="code-number">5</span>)
+<span class="code-function">print</span>(my_dog.name)        <span class="code-comment"># Rex</span>
+<span class="code-function">print</span>(my_dog.species)   <span class="code-comment"># Canis familiaris</span></code></pre>
+            </div>
+
+            <!-- Dunder Methods -->
+            <div class="section-card" style="border-color: #14b8a6;">
+                <h2 class="section-title">Common Dunder Methods</h2>
+                <pre class="code-block"><code class="language-python"><span class="code-keyword">class</span> <span class="code-class">Book</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, title, author):
+        self.title, self.author = title, author
+    
+    <span class="code-comment"># For user-facing output (e.g., print())</span>
+    <span class="code-keyword">def</span> <span class="code-function">__str__</span>(self):
+        <span class="code-keyword">return</span> f<span class="code-string">"{self.title} by {self.author}"</span>
+
+    <span class="code-comment"># For developer-facing output (debugging)</span>
+    <span class="code-keyword">def</span> <span class="code-function">__repr__</span>(self):
+        <span class="code-keyword">return</span> f<span class="code-string">"Book('{self.title}')"</span>
+
+    <span class="code-comment"># For equality checking</span>
+    <span class="code-keyword">def</span> <span class="code-function">__eq__</span>(self, other):
+        <span class="code-keyword">return</span> self.title == other.title
+</code></pre>
+            </div>
+            
+            <!-- Class & Static Methods -->
+            <div class="section-card" style="border-color: #6366f1;">
+                <h2 class="section-title">Class & Static Methods</h2>
+                <pre class="code-block"><code class="language-python"><span class="code-keyword">class</span> <span class="code-class">Calculator</span>:
+    <span class="code-decorator">@staticmethod</span>
+    <span class="code-comment"># Doesn't access class or instance state</span>
+    <span class="code-keyword">def</span> <span class="code-function">add</span>(x, y):
+        <span class="code-keyword">return</span> x + y
+
+    <span class="code-decorator">@classmethod</span>
+    <span class="code-comment"># Accesses class state (cls), not instance state</span>
+    <span class="code-keyword">def</span> <span class="code-function">create_doubler</span>(cls, value):
+        <span class="code-comment"># A factory method</span>
+        <span class="code-keyword">return</span> cls.<span class="code-function">add</span>(value, value)
+
+<span class="code-function">Calculator.add</span>(<span class="code-number">5</span>, <span class="code-number">3</span>) <span class="code-comment"># 8</span>
+<span class="code-function">Calculator.create_doubler</span>(<span class="code-number">10</span>) <span class="code-comment"># 20</span>
+</code></pre>
+            </div>
+
+            <!-- Inheritance -->
+            <div class="section-card" style="border-color: #8b5cf6;">
+                <h2 class="section-title">Inheritance: Reusing Code</h2>
+                <pre class="code-block"><code class="language-python"><span class="code-keyword">class</span> <span class="code-class">Animal</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, name):
+        self.name = name
+    <span class="code-keyword">def</span> <span class="code-function">speak</span>(self): <span class="code-keyword">return</span> <span class="code-string">"Sound"</span>
+
+<span class="code-keyword">class</span> <span class="code-class">Cat</span>(<span class="code-class">Animal</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, name, breed):
+        <span class="code-function">super</span>().<span class="code-function">__init__</span>(name) <span class="code-comment"># Call parent constructor</span>
+        self.breed = breed
+    
+    <span class="code-keyword">def</span> <span class="code-function">speak</span>(self): <span class="code-comment"># Method overriding</span>
+        <span class="code-keyword">return</span> <span class="code-string">"Meow"</span>
+</code></pre>
+            </div>
+            
+            <!-- Encapsulation -->
+            <div class="section-card" style="border-color: #d946ef;">
+                <h2 class="section-title">Encapsulation: Protecting Data</h2>
+                 <pre class="code-block"><code class="language-python"><span class="code-keyword">class</span> <span class="code-class">BankAccount</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, initial_deposit):
+        <span class="code-comment"># Private variable with name mangling</span>
+        self.__balance = initial_deposit
+
+    <span class="code-comment"># Getter using property decorator</span>
+    <span class="code-decorator">@property</span>
+    <span class="code-keyword">def</span> <span class="code-function">balance</span>(self):
+        <span class="code-keyword">return</span> self.__balance
+
+    <span class="code-comment"># Setter for the property</span>
+    <span class="code-decorator">@balance.setter</span>
+    <span class="code-keyword">def</span> <span class="code-function">balance</span>(self, amount):
+        <span class="code-keyword">if</span> amount >= <span class="code-number">0</span>: self.__balance = amount
+</code></pre>
+            </div>
+
+            <!-- Polymorphism -->
+            <div class="section-card" style="border-color: #f43f5e;">
+                <h2 class="section-title">Polymorphism & Duck Typing</h2>
+                <pre class="code-block"><code class="language-python"><span class="code-keyword">class</span> <span class="code-class">Dog</span>:
+    <span class="code-keyword">def</span> <span class="code-function">speak</span>(self): <span class="code-keyword">return</span> <span class="code-string">"Woof!"</span>
+
+<span class="code-keyword">class</span> <span class="code-class">Duck</span>:
+    <span class="code-keyword">def</span> <span class="code-function">speak</span>(self): <span class="code-keyword">return</span> <span class="code-string">"Quack!"</span>
+
+<span class="code-comment"># This function works with any object that has a .speak() method</span>
+<span class="code-keyword">def</span> <span class="code-function">make_it_speak</span>(animal):
+    <span class="code-function">print</span>(animal.<span class="code-function">speak</span>())
+
+<span class="code-function">make_it_speak</span>(<span class="code-class">Dog</span>())   <span class="code-comment"># Woof!</span>
+<span class="code-function">make_it_speak</span>(<span class="code-class">Duck</span>()) <span class="code-comment"># Quack!</span>
+</code></pre>
+            </div>
+
+            <!-- Abstraction -->
+            <div class="section-card" style="border-color: #f97316;">
+                <h2 class="section-title">Abstraction: Defining a Blueprint</h2>
+                <pre class="code-block"><code class="language-python"><span class="code-keyword">from</span> abc <span class="code-keyword">import</span> ABC, abstractmethod
+
+<span class="code-keyword">class</span> <span class="code-class">Shape</span>(ABC): <span class="code-comment"># Abstract Base Class</span>
+    <span class="code-decorator">@abstractmethod</span>
+    <span class="code-keyword">def</span> <span class="code-function">area</span>(self): <span class="code-keyword">pass</span>
+
+<span class="code-keyword">class</span> <span class="code-class">Square</span>(<span class="code-class">Shape</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, side): self.side = side
+    <span class="code-keyword">def</span> <span class="code-function">area</span>(self): <span class="code-keyword">return</span> self.side ** <span class="code-number">2</span>
+
+<span class="code-comment"># s = Shape() # Raises TypeError</span>
+sq = <span class="code-class">Square</span>(<span class="code-number">5</span>); sq.<span class="code-function">area</span>() <span class="code-comment"># 25</span>
+</code></pre>
+            </div>
+            
+            <!-- Interview Questions -->
+            <div class="section-card lg:col-span-2" style="border-color: #eab308;">
+                <h2 class="section-title">Common Interview Questions</h2>
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <strong class="text-yellow-400">Class vs. Instance Variables?</strong>
+                        <p class="text-gray-400"><strong>Class variables</strong> are shared by all instances. <strong>Instance variables</strong> are unique to each instance, defined in `__init__`.</p>
+                    </div>
+                     <div>
+                        <strong class="text-yellow-400">What is Method Resolution Order (MRO)?</strong>
+                        <p class="text-gray-400">In multiple inheritance, MRO is the order Python searches for a method in a class's hierarchy. View with `ClassName.mro()`.</p>
+                    </div>
+                    <div>
+                        <strong class="text-yellow-400">Difference between `__str__` and `__repr__`?</strong>
+                        <p class="text-gray-400">`__str__` is for creating a readable, user-friendly output. `__repr__` is for creating an unambiguous, developer-friendly representation of the object, which should ideally be valid Python code to recreate the object.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
